@@ -49,21 +49,21 @@ public class CoreCommands implements CommandExecutor {
 				}
 			} else if(args.length == 2) {
 				if(args[0].equalsIgnoreCase("enable")) {
-					boolean b = a(args[1], true);
+					boolean b = changePluginStatus(args[1], true);
 					if(b) {
 						p.sendMessage("§8[§aPluginManager§8] §7Success.");
 					} else {
 						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
 					}
 				} else if(args[0].equalsIgnoreCase("disable")) {
-					boolean b = a(args[1], false);
+					boolean b = changePluginStatus(args[1], false);
 					if(b) {
 						p.sendMessage("§8[§aPluginManager§8] §7Success.");
 					} else {
 						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
 					}
 				} else if(args[0].equalsIgnoreCase("load")) {
-					boolean b = a(args[1]);
+					boolean b = loadPlugin(args[1]);
 					if(b) {
 						p.sendMessage("§8[§aPluginManager§8] §7Success.");
 					} else {
@@ -83,13 +83,13 @@ public class CoreCommands implements CommandExecutor {
 	/**
 	 * Load a plugin
 	 */
-	private boolean a(String p0) {
-		File file = new File("plugins", p0);
+	private boolean loadPlugin(String filename) {
+		File file = new File("plugins", filename);
 		if(!file.exists()) return false;
 		if(!file.isFile()) return false;
 		try {
-			Plugin var0 = pl.getPluginManager().loadPlugin(file);
-			return var0 != null;
+			Plugin plugin = pl.getPluginManager().loadPlugin(file);
+			return plugin != null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -99,16 +99,16 @@ public class CoreCommands implements CommandExecutor {
 	/**
 	 * Enable/disable a plugin
 	 */
-	private boolean a(String p0, boolean p1) {
-		Plugin var0 = pl.getPluginManager().getPlugin(p0);
-		if(var0 == null) return false;
-		if(p1) {
-			if(var0.isEnabled()) return false;
-			pl.getPluginManager().enablePlugin(var0);
+	private boolean changePluginStatus(String pluginName, boolean status) {
+		Plugin plugin = pl.getPluginManager().getPlugin(pluginName);
+		if(plugin == null) return false;
+		if(status) {
+			if(plugin.isEnabled()) return false;
+			pl.getPluginManager().enablePlugin(plugin);
 			return true;
 		} else {
-			if(!var0.isEnabled()) return false;
-			pl.getPluginManager().disablePlugin(var0);
+			if(!plugin.isEnabled()) return false;
+			pl.getPluginManager().disablePlugin(plugin);
 			return true;
 		}
 	}
