@@ -16,15 +16,15 @@ public class PM extends JavaPlugin {
 	}
 	
 	public void help(CommandSender p) {
-		p.sendMessage("§8[§cPluginManager§8] §7Syntax help for core commands:");
-		p.sendMessage("§a/pm list §7- §eList of all plugins");
-		p.sendMessage("§a/pm enable <plugin> §7- §eEnable a plugin");
-		p.sendMessage("§a/pm disable <plugin> §7- §eDisable a plugin");
-		p.sendMessage("§a/pm load <file> §7- §eLoad a plugin; optional from another directory");
+		p.sendMessage("Â§8[Â§cPluginManagerÂ§8] Â§7Syntax help for core commands:");
+		p.sendMessage("Â§a/pm list Â§7- Â§eList of all plugins");
+		p.sendMessage("Â§a/pm enable <plugin> Â§7- Â§eEnable a plugin");
+		p.sendMessage("Â§a/pm disable <plugin> Â§7- Â§eDisable a plugin");
+		p.sendMessage("Â§a/pm load <file> Â§7- Â§eLoad a plugin; optional from another directory");
 	}
 	
 	public void noPerms(CommandSender p) {
-		p.sendMessage("§8[§cPluginManager§8] §7You have no permission to do that!");
+		p.sendMessage("Â§8[Â§cPluginManagerÂ§8] Â§7You don't have permission to do that!");
 	}
 	
 }
