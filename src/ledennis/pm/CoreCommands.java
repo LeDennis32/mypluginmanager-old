@@ -69,6 +69,26 @@ public class CoreCommands implements CommandExecutor {
 					} else {
 						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
 					}
+				} else if(args[0].equalsIgnoreCase("depend")) {
+					Plugin plugin = pl.getPluginManager().getPlugin(args[1]);
+					
+					p.sendMessage("§8[§aPluginManager§8] §7Dependencies:");
+					for(String d : plugin.getDescription().getDepend()) {
+						if(pl.getPluginManager().isPluginEnabled(d)) {
+							p.sendMessage("§8[§aPluginManager§8] §a" + d);
+						} else {
+							p.sendMessage("§8[§aPluginManager§8] §c" + d);
+						}
+					}
+					
+					p.sendMessage("§8[§aPluginManager§8] §7Soft Dependencies:");
+					for(String d : plugin.getDescription().getSoftDepend()) {
+						if(pl.getPluginManager().isPluginEnabled(d)) {
+							p.sendMessage("§8[§aPluginManager§8] §a" + d);
+						} else {
+							p.sendMessage("§8[§aPluginManager§8] §c" + d);
+						}
+					}
 				} else {
 					pl.help(p);
 				}

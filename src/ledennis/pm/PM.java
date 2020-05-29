@@ -21,6 +21,7 @@ public class PM extends JavaPlugin {
 		p.sendMessage("§a/pm enable <plugin> §7- §eEnable a plugin");
 		p.sendMessage("§a/pm disable <plugin> §7- §eDisable a plugin");
 		p.sendMessage("§a/pm load <file> §7- §eLoad a plugin; optional from another directory");
+		p.sendMessage("§a/pm depend <plugin> §7- §eList dependencies of a plugin");
 	}
 	
 	public void noPerms(CommandSender p) {
