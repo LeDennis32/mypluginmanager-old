@@ -131,6 +131,18 @@ public class CoreCommands implements CommandExecutor {
 					} else {
 						p.sendMessage(pl.errorPrefix + "That plugin doesn't exist.");
 					}
+				} else if(args[0].equalsIgnoreCase("reload")) {
+					Plugin plugin = pl.getPluginManager().getPlugin(args[1]);
+					
+					if(plugin != null) {
+						if(plugin.isEnabled()) {
+							pl.getPluginManager().disablePlugin(plugin);
+						}
+						pl.getPluginManager().enablePlugin(plugin);
+						p.sendMessage(pl.successPrefix + "Plugin reloaded.");
+					} else {
+						p.sendMessage(pl.errorPrefix + "That plugin doesn't exist.");
+					}
 				} else {
 					pl.help(p);
 				}

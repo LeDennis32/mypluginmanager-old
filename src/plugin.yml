@@ -1,7 +1,7 @@
 main: ledennis.pm.PM
 
 name: myPluginManager
-version: 1.1
+version: 1.2
 author: LeDennis32
 description: Plugin for managing your plugins.
 
