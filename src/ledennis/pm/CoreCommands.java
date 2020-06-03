@@ -49,45 +49,59 @@ public class CoreCommands implements CommandExecutor {
 				}
 			} else if(args.length == 2) {
 				if(args[0].equalsIgnoreCase("enable")) {
-					boolean b = changePluginStatus(args[1], true);
-					if(b) {
-						p.sendMessage("§8[§aPluginManager§8] §7Success.");
+					if(pl.getPluginManager().getPlugin(args[1]) != null) {
+						boolean b = changePluginStatus(args[1], true);
+						if(b) {
+							p.sendMessage("§8[§aPluginManager§8] §7Success.");
+						} else {
+							p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
+						}
 					} else {
-						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
+						p.sendMessage("§8[§cPluginManager§8] §7That plugin doesn't exist.");
 					}
 				} else if(args[0].equalsIgnoreCase("disable")) {
-					boolean b = changePluginStatus(args[1], false);
-					if(b) {
-						p.sendMessage("§8[§aPluginManager§8] §7Success.");
+					if(pl.getPluginManager().getPlugin(args[1]) != null) {
+						boolean b = changePluginStatus(args[1], false);
+						if(b) {
+							p.sendMessage("§8[§aPluginManager§8] §7Success.");
+						} else {
+							p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
+						}
 					} else {
-						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
+						p.sendMessage("§8[§cPluginManager§8] §7That plugin doesn't exist.");
 					}
 				} else if(args[0].equalsIgnoreCase("load")) {
 					boolean b = loadPlugin(args[1]);
 					if(b) {
 						p.sendMessage("§8[§aPluginManager§8] §7Success.");
 					} else {
-						p.sendMessage("§8[§cPluginManager§8] §7An error occured.");
+						p.sendMessage("§8[§cPluginManager§8] §7An error occured. Maybe the file doesn't exist?");
 					}
 				} else if(args[0].equalsIgnoreCase("depend")) {
 					Plugin plugin = pl.getPluginManager().getPlugin(args[1]);
 					
-					p.sendMessage("§8[§aPluginManager§8] §7Dependencies:");
-					for(String d : plugin.getDescription().getDepend()) {
-						if(pl.getPluginManager().isPluginEnabled(d)) {
-							p.sendMessage("§8[§aPluginManager§8] §a" + d);
-						} else {
-							p.sendMessage("§8[§aPluginManager§8] §c" + d);
-						}
-					}
+					if(plugin != null) {
 					
-					p.sendMessage("§8[§aPluginManager§8] §7Soft Dependencies:");
-					for(String d : plugin.getDescription().getSoftDepend()) {
-						if(pl.getPluginManager().isPluginEnabled(d)) {
-							p.sendMessage("§8[§aPluginManager§8] §a" + d);
-						} else {
-							p.sendMessage("§8[§aPluginManager§8] §c" + d);
+						p.sendMessage("§8[§aPluginManager§8] §7Dependencies:");
+						for(String d : plugin.getDescription().getDepend()) {
+							if(pl.getPluginManager().isPluginEnabled(d)) {
+								p.sendMessage("§8[§aPluginManager§8] §a" + d);
+							} else {
+								p.sendMessage("§8[§aPluginManager§8] §c" + d);
+							}
 						}
+						
+						p.sendMessage("§8[§aPluginManager§8] §7Soft Dependencies:");
+						for(String d : plugin.getDescription().getSoftDepend()) {
+							if(pl.getPluginManager().isPluginEnabled(d)) {
+								p.sendMessage("§8[§aPluginManager§8] §a" + d);
+							} else {
+								p.sendMessage("§8[§aPluginManager§8] §c" + d);
+							}
+						}
+					
+					} else {
+						p.sendMessage("§8[§cPluginManager§8] §7That plugin doesn't exist.");
 					}
 				} else {
 					pl.help(p);
