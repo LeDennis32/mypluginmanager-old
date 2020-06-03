@@ -6,6 +6,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class PM extends JavaPlugin {
 	
+	public String successPrefix = "§8[§aPluginManager§8] §7";
+	public String errorPrefix = "§8[§cPluginManager§8] §7";
+	
 	@Override
 	public void onEnable() {
 		new CoreCommands(this);
@@ -16,7 +19,7 @@ public class PM extends JavaPlugin {
 	}
 	
 	public void help(CommandSender p) {
-		p.sendMessage("§8[§cPluginManager§8] §7Syntax help for core commands:");
+		p.sendMessage(errorPrefix + "Syntax help for core commands:");
 		p.sendMessage("§a/pm list §7- §eList of all plugins");
 		p.sendMessage("§a/pm enable <plugin> §7- §eEnable a plugin");
 		p.sendMessage("§a/pm disable <plugin> §7- §eDisable a plugin");
@@ -25,7 +28,7 @@ public class PM extends JavaPlugin {
 	}
 	
 	public void noPerms(CommandSender p) {
-		p.sendMessage("§8[§cPluginManager§8] §7You don't have permission to do that!");
+		p.sendMessage(errorPrefix + "You don't have permission to do that!");
 	}
 	
 }
