@@ -103,6 +103,34 @@ public class CoreCommands implements CommandExecutor {
 					} else {
 						p.sendMessage(pl.errorPrefix + "That plugin doesn't exist.");
 					}
+				} else if(args[0].equalsIgnoreCase("info")) {
+					Plugin plugin = pl.getPluginManager().getPlugin(args[1]);
+					
+					if(plugin != null) {
+						
+						p.sendMessage(pl.successPrefix + "Plugin info for §a" + plugin.getName() + "§7:");
+						p.sendMessage("§7Main Class: §a" + plugin.getDescription().getMain());
+						p.sendMessage("§7Version: §a" + plugin.getDescription().getVersion());
+						
+						if(plugin.getDescription().getAuthors().size() > 1) {
+							String msg = "§7Authors: ";
+							for(String author : plugin.getDescription().getAuthors()) {
+								msg += "§a" + author + "§7, ";
+							}
+							msg = msg.trim().substring(0, msg.length() - 2);
+							p.sendMessage(msg);
+						} else {
+							p.sendMessage("§7Author: §a" + plugin.getDescription().getAuthors().get(0));
+						}
+						
+						p.sendMessage("§7Description: " 
+										+ (plugin.getDescription().getDescription() == null
+									    	? "§cnone"
+									    	: "§a" + plugin.getDescription().getDescription()));
+						
+					} else {
+						p.sendMessage(pl.errorPrefix + "That plugin doesn't exist.");
+					}
 				} else {
 					pl.help(p);
 				}
